@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import React ,{ useState, useEffect, useContext } from 'react';
+import { settingsContext } from '../Components/Context/Settings';
 
 const useForm = (callback, defaultValues={}) => {
 
-  const [values, setValues] = useState({});
-
+  // const [values, setValues] = useState({});
+  const { setValues, values , sort} = useContext(settingsContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     callback({...values});

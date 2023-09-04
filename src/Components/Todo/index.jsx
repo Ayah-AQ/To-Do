@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import useForm from '../../hooks/form';
+import List from '../List';
+
 
 import { v4 as uuid } from 'uuid';
+import { settingsContext } from '../Context/Settings';
 
 const Todo = () => {
+
+  const {list,setList,incomplete,setIncomplete} = useContext(settingsContext);
 
   const [defaultValues] = useState({
     difficulty: 4,
   });
-  const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState([]);
+  // const [list, setList] = useState([]);
+  // const [incomplete, setIncomplete] = useState([]);
+  
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
@@ -34,6 +40,7 @@ const Todo = () => {
     });
 
     setList(items);
+    deleteItem(id)
 
   }
 
@@ -75,8 +82,9 @@ const Todo = () => {
           <button type="submit">Add Item</button>
         </label>
       </form>
+      <List list = {list} toggleComplete={toggleComplete}></List>
 
-      {list.map(item => (
+      {/* {list.map(item => (
         <div key={item.id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
@@ -84,7 +92,7 @@ const Todo = () => {
           <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
           <hr />
         </div>
-      ))}
+      ))} */}
 
     </>
   );
