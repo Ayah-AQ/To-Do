@@ -11,6 +11,6 @@ Currently, two official plugins are available:
 UML
 ![Alt text](<Assesst/Screenshot 2023-09-05 000606.png>)
 
-[Deployed Link Netlify](https://deploy-preview-1--loquacious-kitsune-8673e7.netlify.app/)
+[Deployed Link Netlify](https://deploy-preview-1--loquacious-kitsune-8673e7.netlify.app/) </br>
 [Sandbox-1](https://codesandbox.io/p/github/Ayah-AQ/To-Do/main?workspaceId=164b9a3e-7782-4e7b-8cc4-6d4ffcc736a1)
 
