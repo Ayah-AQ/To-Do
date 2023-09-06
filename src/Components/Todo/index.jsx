@@ -40,22 +40,23 @@ const Todo = () => {
     });
 
     setList(items);
-    deleteItem(id)
+    // deleteItem(id)
 
   }
 
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
+    document.title = `To Do List: ${incomplete} items completed`;
     // linter will want 'incomplete' added to dependency array unnecessarily. 
-    // disable code used to avoid linter warning 
+     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [list]);  
 
+  
   return (
     <>
-      <header data-testid="todo-header">
+      <header data-testid="todo-header" >
         <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
       </header>
 
@@ -79,7 +80,7 @@ const Todo = () => {
         </label>
 
         <label>
-          <button type="submit">Add Item</button>
+          <button type="submit" >Add Item</button>
         </label>
       </form>
       <List list = {list} toggleComplete={toggleComplete}></List>
