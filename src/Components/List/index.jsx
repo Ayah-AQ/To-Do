@@ -1,28 +1,55 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { settingsContext } from '../Context/Settings';
 import { Pagination } from '@mantine/core';
 
 
 export default function List({ list, toggleComplete }) {
 
-const {ItemsInPage,currentPage,setCurrentPage} = useContext(settingsContext);
+const { itemsInPage, showCompleted, updateItemsInPage, toggleShowCompleted,currentPage,setCurrentPage, setShowCompleted, incomplete} = useContext(settingsContext);
 
 
-  const startIndex = (currentPage - 1) * ItemsInPage; 
-  const endIndex = startIndex + ItemsInPage; 
+  const startIndex = (currentPage - 1) * itemsInPage; 
+  const endIndex = startIndex + itemsInPage; 
 
+  // const itemsToDisplay = list.slice(startIndex, endIndex); 
 
-  const itemsToDisplay = list.slice(startIndex, endIndex); 
-
- 
-  const handlePageChange = (newPage) => {
+   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
+ 
+    const itemsToDisplay = list
+    .filter((item) => (showCompleted ? true : !item.complete))
+    .slice(startIndex, endIndex);
+
+
+
+  useEffect(() => {
+    updateItemsInPage(itemsInPage);
+    toggleShowCompleted(showCompleted);
+  }, [itemsInPage, showCompleted]);
+ 
   return (
     <div>
-      {itemsToDisplay.map((item) => (
-        <div key={item.id}>
+    <form >
+
+      <label>
+        Items In Page:
+        <input
+            type="number"
+            value={itemsInPage}
+            onChange={(e) => updateItemsInPage(Number(e.target.value))}
+          />
+      </label>
+
+      <label>
+        Show Completed:
+        <input type="checkbox" checked={showCompleted}  onChange={() => setShowCompleted(!showCompleted)}
+/>
+      </label>
+</form>
+        {itemsToDisplay.map((item) => (
+          <div key={item.id}>
           <p>{item.text}</p>
           <p>
             <small>Assigned to: {item.assignee}</small>
@@ -30,23 +57,23 @@ const {ItemsInPage,currentPage,setCurrentPage} = useContext(settingsContext);
           <p>
             <small>Difficulty: {item.difficulty}</small>
           </p>
-          <button onClick={() => toggleComplete(item.id)} style={{cursor:"pointer"}}>
+          <button onClick={() => toggleComplete(item.id)} style={{cursor:"pointer",  backgroundColor: item.complete ? 'green' : 'red', color: 'white' }}>
             Complete: {item.complete.toString()}
           </button>
           <hr />
         </div>
       ))}
 
-      {list.length > ItemsInPage && (
+      {list.length > itemsInPage && (
         <Pagination
-          total={Math.ceil(list.length / ItemsInPage)} 
+          total={Math.ceil(list.length / itemsInPage)} 
           value={currentPage}
           onChange={handlePageChange}
           position="center"
           styles={(theme) => ({
             control: {
               '&[data-active]': {
-                backgroundImage: theme.fn.gradient({ from: 'red', to: 'yellow' }),
+                backgroundImage: theme.fn.gradient({ from: 'pink', to: 'purple' }),
                 border: 0,
               },
             },
