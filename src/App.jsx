@@ -1,13 +1,14 @@
 import React from 'react';
-
-import Todo from './Components/Todo';
 import { SettingsProvider } from './Components/Context/Settings';
+import Routers from './Components/Routes';
+import Headers from './Components/Header';
 
 export default class App extends React.Component {
   render() {
     return (
       <SettingsProvider>
-      <Todo />
+        <Headers />
+        <Routers />
       </SettingsProvider>
     );
   }

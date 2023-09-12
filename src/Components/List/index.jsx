@@ -31,7 +31,7 @@ const { itemsInPage, showCompleted, updateItemsInPage, toggleShowCompleted,curre
  
   return (
     <div>
-    <form >
+    {/* <form >
 
       <label>
         Items In Page:
@@ -47,7 +47,7 @@ const { itemsInPage, showCompleted, updateItemsInPage, toggleShowCompleted,curre
         <input type="checkbox" checked={showCompleted}  onChange={() => setShowCompleted(!showCompleted)}
 />
       </label>
-</form>
+</form> */}
         {itemsToDisplay.map((item) => (
           <div key={item.id}>
           <p>{item.text}</p>
