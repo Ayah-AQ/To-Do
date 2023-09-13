@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { settingsContext } from '../Context/Settings';
 import { Pagination } from '@mantine/core';
+import Auth from '../Auth';
 
 
 export default function List({ list, toggleComplete }) {
@@ -48,25 +49,21 @@ const { itemsInPage, showCompleted, updateItemsInPage, toggleShowCompleted,curre
 />
       </label>
 </form> */}
+    
+        {/* <Auth capability="read">  */}
         {itemsToDisplay.map((item) => (
           <div key={item.id}>
-          <p>{item.text}</p>
-          <p>
-            <small>Assigned to: {item.assignee}</small>
-          </p>
-          <p>
-            <small>Difficulty: {item.difficulty}</small>
-          </p>
-          <button onClick={() => toggleComplete(item.id)} style={{cursor:"pointer",  backgroundColor: item.complete ? 'green' : 'red', color: 'white' }}>
-            Complete: {item.complete.toString()}
-          </button>
-          <hr />
-        </div>
-      ))}
-
+            {/* ... */}
+            <button onClick={() => toggleComplete(item.id)} style={{ cursor: "pointer", backgroundColor: item.complete ? 'green' : 'red', color: 'white' }}>
+              Complete: {item.complete.toString()}
+            </button>
+            <hr />
+          </div>
+        ))}
+      {/* </Auth> */}
       {list.length > itemsInPage && (
         <Pagination
-          total={Math.ceil(list.length / itemsInPage)} 
+          total={Math.ceil(list.length / itemsInPage)}
           value={currentPage}
           onChange={handlePageChange}
           position="center"
