@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { LoginContext } from '../Context/Auth';
+import { Link } from 'react-router-dom';
+import { When } from "react-if";
+
 
 function Login() {
   const loginContext = useContext(LoginContext);
@@ -17,6 +20,7 @@ function Login() {
     try {
       await loginContext.login(formData.username, formData.password);
       setLoginError(null);
+      console.log(loginContext.isLoggedIn)
     } catch (error) {
       setLoginError(error.message);
     }
@@ -24,9 +28,7 @@ function Login() {
   
   return (
     <>
-      {loginContext.loggedIn ? (
-        <button onClick={loginContext.logout}>Log Out</button>
-      ) : (
+     {(!loginContext.loggedIn && !loginContext.showSignup) && (
         <form onSubmit={handleSubmit}>
           {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
           <input
@@ -41,9 +43,17 @@ function Login() {
             type="password"
           />
           <button>Login</button>
+          <span>
+                If you dont have an account you can sign up
+                <Link to={"/signup"}>here</Link>
+              </span>
         </form>
       )}
-    </>
+      {/* {loginContext.showSignup && <SignUp />} */}
+    <When condition={loginContext.loggedIn}>
+    <button onClick={loginContext.logout}>Log Out</button>
+   </When>
+     </>
   );
 }
 
