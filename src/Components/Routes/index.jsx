@@ -3,6 +3,7 @@ import {  Routes, Route } from "react-router-dom";
 import Todo from '../Todo';
 import SettingForm from '../sittengsForm';
 import Login from '../Login';
+import SignUp from '../Login/signup';
 
 
 
@@ -11,8 +12,8 @@ export default function Routers() {
     <div>
     <Routes>
    <Route path="/Settings"  element={<SettingForm/>}/>
-   <Route path="/login"  element={<Login/>}/>
-   <Route path="/"  element={<Todo/>}/>
+   <Route path="/signup"  element={<SignUp/>}/>
+   <Route path="/"  element={<Login/>}/>
 
   </Routes> 
        </div>

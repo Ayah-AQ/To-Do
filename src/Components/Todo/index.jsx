@@ -1,14 +1,16 @@
 import React, { useEffect, useState,useContext } from 'react';
 import useForm from '../../hooks/form';
 import List from '../List';
-
+import { When } from 'react-if';
 
 import { v4 as uuid } from 'uuid';
 import { settingsContext } from '../Context/Settings';
+import { LoginContext } from '../Context/Auth';
 
 const Todo = () => {
 
   const {list,setList,incomplete,setIncomplete} = useContext(settingsContext);
+  const loginContext = useContext(LoginContext);
 
   const [defaultValues] = useState({
     difficulty: 4,
@@ -44,6 +46,76 @@ const Todo = () => {
 
   }
 
+  // async function addItem(item) {
+  //   try {
+  //     const response = await fetch('http://localhost:8000/tasks', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(item),
+  //     });
+
+  //     if (response.ok) {
+  //       const newItem = await response.json();
+  //       setList([...list, newItem]);
+  //     } else {
+  //       // Handle error
+  //       console.error('Failed to add item');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
+
+  // async function deleteItem(id) {
+  //   try {
+  //     const response = await fetch(`https://todo-gyyb.onrender.com/tasks/${id}`, {
+  //       method: 'DELETE',
+  //     });
+
+  //     if (response.ok) {
+  //       const updatedList = list.filter((item) => item.id !== id);
+  //       setList(updatedList);
+  //     } else {
+  //       // Handle error
+  //       console.error('Failed to delete item');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
+
+  // async function toggleComplete(id) {
+  //   const itemToUpdate = list.find((item) => item.id === id);
+  //   if (!itemToUpdate) {
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch(`https://todo-gyyb.onrender.com/tasks/${id}`, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ complete: !itemToUpdate.complete }),
+  //     });
+
+  //     if (response.ok) {
+  //       const updatedItem = await response.json();
+  //       const updatedList = list.map((item) =>
+  //         item.id === id ? updatedItem : item
+  //       );
+  //       setList(updatedList);
+  //     } else {
+  //       // Handle error
+  //       console.error('Failed to update item');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
+
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
@@ -56,6 +128,7 @@ const Todo = () => {
   
   return (
     <>
+    <When condition={loginContext.loggedIn}>
       <header data-testid="todo-header" >
         <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
       </header>
@@ -94,7 +167,7 @@ const Todo = () => {
           <hr />
         </div>
       ))} */}
-
+   </When>
     </>
   );
 };
