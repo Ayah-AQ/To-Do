@@ -12,9 +12,11 @@ export default function App() {
     <AuthProvider>
       {/* <Login/> */}
       <SettingsProvider>
+      <Auth>
+        <Headers />
+      </Auth> 
           <Routers />
         <Auth>
-        <Headers />
         <Todo/>
         </Auth> 
           
