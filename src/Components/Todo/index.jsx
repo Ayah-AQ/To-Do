@@ -48,7 +48,7 @@ const Todo = () => {
 
   // async function addItem(item) {
   //   try {
-  //     const response = await fetch('http://localhost:8000/tasks', {
+  //     const response = await fetch('http://localhost:8000/todo', {
   //       method: 'POST',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const Todo = () => {
 
   // async function deleteItem(id) {
   //   try {
-  //     const response = await fetch(`https://todo-gyyb.onrender.com/tasks/${id}`, {
+  //     const response = await fetch(`https://todo-gyyb.onrender.com/todo/${id}`, {
   //       method: 'DELETE',
   //     });
 
@@ -93,7 +93,7 @@ const Todo = () => {
   //   }
 
   //   try {
-  //     const response = await fetch(`https://todo-gyyb.onrender.com/tasks/${id}`, {
+  //     const response = await fetch(`https://todo-gyyb.onrender.com/todo/${id}`, {
   //       method: 'PUT',
   //       headers: {
   //         'Content-Type': 'application/json',
